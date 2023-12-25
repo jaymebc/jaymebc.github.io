@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Índice de Massa Corporal</title>
+    <script>
+        function calcularIMC() {
+            // Obter os valores do formulário
+            var pesoInput = document.getElementById("peso");
+            var alturaInput = document.getElementById("altura");
+
+            // Substituir vírgulas por pontos nos valores de entrada
+            var peso = pesoInput.value.replace(',', '.');
+            var altura = alturaInput.value.replace(',', '.');
+
+            // Verificar se as entradas são números
+            if (isNaN(peso) || isNaN(altura)) {
+                alert("Por favor, insira valores numéricos para peso e altura.");
+                return;
+            }
+
+            // Converter altura para metros
+            altura = altura / 100;
+
+            // Calcular IMC
+            var imc = peso / (altura * altura);
+
+            // Exibir o resultado
+            document.getElementById("resultado").innerHTML = "Seu IMC é: " + imc.toFixed(2);
+        }
+
+        function voltarParaMenuPrincipal() {
+            // Redirecionar para a página principal (index.html)
+            window.location.href = "index.html";
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Calcular Índice de Massa Corporal (IMC)</h1>
+
+    <!-- Formulário para inserir peso e altura -->
+    <form>
+        <label for="peso">Peso (kg):</label>
+        <input type="text" id="peso" name="peso" required>
+
+        <label for="altura">Altura (cm):</label>
+        <input type="text" id="altura" name="altura" required>
+        <p></p>
+        <button type="button" onclick="calcularIMC()">Calcular IMC</button>
+    </form>
+
+    <!-- Resultado do cálculo exibido aqui -->
+    <div id="resultado"></div>
+<p></p>
+<p></p>
+    <!-- Botão para voltar à página principal -->
+    <button onclick="voltarParaMenuPrincipal()">Voltar ao Menu Principal</button>
+
+</body>
+</html>

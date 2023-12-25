@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular Hemodiluição Normovolêmica</title>
+    <script>
+        function validarNumeroPositivo(valor) {
+            // Verificar se é um número positivo válido
+            return !isNaN(valor) && parseFloat(valor) >= 0;
+        }
+
+        function calcularHemodiluicao() {
+            // Obter os valores do formulário
+            var peso = document.getElementById("peso").value;
+            var volemiaEstimada = document.getElementById("volemiaEstimada").value;
+            var hematocritoInicial = document.getElementById("hematocritoInicial").value;
+            var hematocritoFinal = document.getElementById("hematocritoFinal").value;
+
+            // Validar números positivos
+            if (!validarNumeroPositivo(peso) || !validarNumeroPositivo(volemiaEstimada) || !validarNumeroPositivo(hematocritoInicial) || !validarNumeroPositivo(hematocritoFinal)) {
+                alert("Por favor, insira valores numéricos positivos.");
+                return;
+            }
+
+            // Substituir vírgulas por pontos nos valores de entrada
+            peso = peso.replace(',', '.');
+            volemiaEstimada = volemiaEstimada.replace(',', '.');
+            hematocritoInicial = hematocritoInicial.replace(',', '.');
+            hematocritoFinal = hematocritoFinal.replace(',', '.');
+
+            // Calcular volemia total
+            var volemiaTotal = peso * volemiaEstimada;
+
+            // Calcular volume a ser retirado
+            var volumeRetirado = (volemiaTotal * (parseFloat(hematocritoFinal) - parseFloat(hematocritoInicial))) / ((parseFloat(hematocritoFinal) + parseFloat(hematocritoInicial)) / 2);
+
+            // Garantir que os resultados sejam positivos
+            volemiaTotal = Math.abs(volemiaTotal);
+            volumeRetirado = Math.abs(volumeRetirado);
+
+            // Exibir o resultado
+            document.getElementById("resultado").innerHTML = "Volemia total: " + volemiaTotal.toFixed(0) + " mL<br>Volume a ser retirado: " + volumeRetirado.toFixed(0) + " mL";
+        }
+
+        function voltarParaMenuPrincipal() {
+            // Redirecionar para a página principal (index.html)
+            window.location.href = "index.html";
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Calcular Hemodiluição Normovolêmica</h1>
+
+    <!-- Formulário para inserir peso, volemia estimada e hematócrito -->
+    <form>
+
+        <label for="peso">Peso (kg):</label>
+        <input type="text" id="peso" name="peso" required>
+        <p></p>
+        <label for="volemiaEstimada">Volemia Estimada (mL/kg):</label>
+        <input type="text" id="volemiaEstimada" name="volemiaEstimada" required>
+        <head>(VR = 70mL/kg)</head>
+
+        <br> <!-- Linha em branco para espaçamento -->
+        <br>
+
+        <label for="hematocritoInicial">Hematócrito Inicial (%):</label>
+        <input type="text" id="hematocritoInicial" name="hematocritoInicial" required>
+        <p></p>
+        <label for="hematocritoFinal">Hematócrito Final (%):</label>
+        <input type="text" id="hematocritoFinal" name="hematocritoFinal" required>
+
+        <br> <!-- Linha em branco para espaçamento -->
+        <br>
+
+        <button type="button" onclick="calcularHemodiluicao()">Calcular Hemodiluição</button>
+    </form>
+
+    <!-- Resultado do cálculo exibido aqui -->
+    <div id="resultado"></div>
+
+    <br> <!-- Linha em branco para espaçamento -->
+
+    <!-- Botão para voltar à página principal -->
+    <button onclick="voltarParaMenuPrincipal()">Voltar para o Menu Principal</button>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular Delta PP</title>
+    <script>
+        function validarNumero(valor) {
+            // Verificar se é um número válido
+            return !isNaN(valor) && (typeof valor === 'number' || !/[^0-9.,]/.test(valor));
+        }
+
+        function calcularDeltaPP() {
+            // Obter os valores do formulário
+            var pressaoSistolicaAlta = document.getElementById("pressaoSistolicaAlta").value;
+            var pressaoDiastolicaAlta = document.getElementById("pressaoDiastolicaAlta").value;
+            var pressaoSistolicaBaixa = document.getElementById("pressaoSistolicaBaixa").value;
+            var pressaoDiastolicaBaixa = document.getElementById("pressaoDiastolicaBaixa").value;
+
+            // Validar números
+            if (!validarNumero(pressaoSistolicaAlta) || !validarNumero(pressaoDiastolicaAlta) || !validarNumero(pressaoSistolicaBaixa) || !validarNumero(pressaoDiastolicaBaixa)) {
+                alert("Por favor, insira valores numéricos válidos para pressão sistólica e diastólica.");
+                return;
+            }
+
+            // Substituir vírgulas por pontos nos valores de entrada
+            pressaoSistolicaAlta = pressaoSistolicaAlta.replace(',', '.');
+            pressaoDiastolicaAlta = pressaoDiastolicaAlta.replace(',', '.');
+            pressaoSistolicaBaixa = pressaoSistolicaBaixa.replace(',', '.');
+            pressaoDiastolicaBaixa = pressaoDiastolicaBaixa.replace(',', '.');
+
+            // Calcular diferenças
+            var diferencaMaisAlta = pressaoSistolicaAlta - pressaoDiastolicaAlta;
+            var diferencaMaisBaixa = pressaoSistolicaBaixa - pressaoDiastolicaBaixa;
+
+            // Calcular média e diferença entre as diferenças
+            var media = (diferencaMaisAlta + diferencaMaisBaixa) / 2;
+            var diferencaEntreDiferencas = Math.abs(diferencaMaisAlta - diferencaMaisBaixa); // Garante um valor não negativo
+
+            // Calcular DPP
+            var dpp = (diferencaEntreDiferencas * 100) / media;
+
+            // Exibir o resultado
+            document.getElementById("resultado").innerHTML = "Seu DPP é: " + dpp.toFixed(2);
+        }
+
+        function voltarParaMenuPrincipal() {
+            // Redirecionar para a página principal (index.html)
+            window.location.href = "index.html";
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Calcular Delta PP</h1>
+
+    <!-- Formulário para inserir pressão sistólica e diastólica -->
+    <form>
+
+        <h4>Valores mais altos</h4>
+        <p></p>
+        
+        <label for="pressaoSistolicaAlta">PS (mmHg):</label>
+        <input type="text" id="pressaoSistolicaAlta" name="pressaoSistolicaAlta" required>
+        
+        <label for="pressaoDiastolicaAlta">PD (mmHg):</label>
+        <input type="text" id="pressaoDiastolicaAlta" name="pressaoDiastolicaAlta" required>
+
+        <p></p> <!-- Linha em branco para espaçamento -->
+        
+        <h4>Valores mais baixos</h4>
+
+        <p></p>
+
+        <label for="pressaoSistolicaBaixa">PS (mmHg):</label>
+        <input type="text" id="pressaoSistolicaBaixa" name="pressaoSistolicaBaixa" required>
+
+        <label for="pressaoDiastolicaBaixa">PD (mmHg):</label>
+        <input type="text" id="pressaoDiastolicaBaixa" name="pressaoDiastolicaBaixa" required>
+
+        <br> <!-- Linha em branco para espaçamento -->
+        <br>
+        <button type="button" onclick="calcularDeltaPP()">Calcular Delta PP</button>
+    </form>
+
+    <!-- Resultado do cálculo exibido aqui -->
+    <div id="resultado"></div>
+
+    <br> <!-- Linha em branco para espaçamento -->
+
+    <p></p>
+    <!-- Botão para voltar à página principal -->
+    <button onclick="voltarParaMenuPrincipal()">Voltar para o Menu Principal</button>
+    <p></p>
+
+    <!-- Imagem -->
+    <img src="imagemdpp.png" alt="Imagem" style="max-width: 30%; height: auto;">
+    
+</body>
+</html>
