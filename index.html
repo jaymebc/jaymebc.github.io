@@ -1,55 +1,20 @@
 <!DOCTYPE html>
-<html>
-<body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
-<p></p>
-<p>Vamos ver como isso fica!</p>
-</body>
-</html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soma de Números</title>
-    <script>
-        function calcularSoma() {
-            // Obtém os valores dos campos de entrada
-            var num1 = parseFloat(document.getElementById("numero1").value);
-            var num2 = parseFloat(document.getElementById("numero2").value);
-
-            // Verifica se os valores são números válidos
-            if (!isNaN(num1) && !isNaN(num2)) {
-                // Realiza a soma
-                var resultado = num1 + num2;
-
-                // Exibe o resultado
-                document.getElementById("resultado").innerHTML = "Resultado: " + resultado;
-            } else {
-                // Exibe uma mensagem de erro se os valores não forem números válidos
-                document.getElementById("resultado").innerHTML = "Por favor, insira números válidos.";
-            }
-        }
-    </script>
+    <title>Cálculos</title>
 </head>
 <body>
-    <h2>Soma de Números</h2>
+
+    <h1>Menu de Cálculos</h1>
     
-    <label for="numero1">Número 1:</label>
-    <input type="text" id="numero1" placeholder="Digite o primeiro número">
+    <ul>
+        <li><a href="DPP.html">1 – Calcular Delta PP</a></li>
+        <li><a href="IMC.html">2 – Calcular IMC</a></li>
+        <li><a href="Hemod.html">3 – Dados Hemodinâmicos</a></li>
+        <li><a href="Infusao.html">4 – Infusão Contínua</a></li>
+    </ul>
 
-    <br>
-
-    <label for="numero2">Número 2:</label>
-    <input type="text" id="numero2" placeholder="Digite o segundo número">
-
-    <br>
-
-    <button onclick="calcularSoma()">Calcular Soma</button>
-
-    <br>
-
-    <p id="resultado"></p>
 </body>
 </html>
